@@ -1,0 +1,7 @@
+conf:
+    metric_dir: 'metrics/metrics_ab/'
+plan_sample:
+    # 连续指标：CV=0.3, 预期相对提升 +5%, power=0.8
+    - SampleSizeMetric: 'mode:mean,cv:0.3,delta:0.05,power:0.8,alpha:0.05'
+    # 比例指标：基线转化 20%, 最小可检测差 +2pp, power=0.8
+    - SampleSizeMetric: 'mode:proportion,p_baseline:0.2,mde:0.02,power:0.8,alpha:0.05'

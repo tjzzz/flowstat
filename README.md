@@ -16,7 +16,7 @@ exp.yaml ──▶ ExpConf 解析
 - `run.py`            总入口（CLI + `run()` 函数）
 - `utils.py`          `ExpConf`（解析 yaml）、`StreamTask`（加载并链式执行 metric）
 - `readers/`         reader 注册（`reader.yaml`）+ `BaseReader` 基类 + 示例 `CSVReaders`
-- `metrics/`         metric 插件库（自带 `metrics_demo` 示例）
+- `metrics/`         metric 插件库（自带 `metrics_demo` / `metrics_ab` 示例）
 - `src/`             通用工具（`tools` 日期/几何、`send_mail` 邮件占位）
 - `examples/`        示例 yaml + 合成数据
 
@@ -69,6 +69,25 @@ my_stream:
 
 继承 `BaseReader`，实现 `fetch_xxx(self)` 返回 `(DataFrame, name)`，
 并在 `readers/reader.yaml` 注册：`your_reader: YourReaders`。
+
+## A/B 实验支持
+
+`src/abtools.py` 提供通用统计函数，`metrics/metrics_ab/` 提供框架原生插件：
+
+- `srm_test`              样本比例失衡(SRM)卡方检验
+- `welch_ttest`           Welch 两样本 t 检验（均值差 + 置信区间 + Cohen's d）
+- `two_proportion_test`   两比例 z 检验（转化率）
+- `min_sample_size_mean`        连续指标最小样本量（输入 CV + 相对提升）
+- `min_sample_size_proportion` 比例指标最小样本量（基线 + 绝对 MDE）
+- `cuped_adjust`          CUPED 方差缩减（用实验前协变量降低方差）
+- `benjamini_hochberg`   多指标同时检验时的 FDR 校正
+
+跑示例：
+
+```bash
+python run.py -e examples/3_ab_analysis.yaml -m ab_analysis
+python run.py -e examples/4_sample_size.yaml -m plan_sample
+```
 
 ## 提交前自检
 

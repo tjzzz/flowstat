@@ -13,3 +13,8 @@ class CSVReaders(object):
         """读取示例事件数据，返回 (DataFrame, 'events')。"""
         df = pd.read_csv(os.path.join(self.data_dir, 'sample_events.csv'))
         return df, 'events'
+
+    def load_ab(self):
+        """读取示例 A/B 实验数据(control/treatment)，返回 (DataFrame, 'ab')。"""
+        df = pd.read_csv(os.path.join(self.data_dir, 'sample_ab.csv'))
+        return df, 'ab'

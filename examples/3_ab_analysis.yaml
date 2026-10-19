@@ -1,0 +1,5 @@
+conf:
+    metric_dir: 'metrics/metrics_ab/'
+ab_analysis:
+    - reader: csv.load_ab
+    - ABTestMetric: 'group_col:group,value_col:value,conv_col:converted,alpha:0.05'
