@@ -1,6 +1,6 @@
 #encoding=utf8
 """
-FlowStat 总入口（已脱敏，去除原 aibee 凭证/内网/域名）。
+FlowStat 总入口（通用，基于 pandas 的 DataFrame 分析框架）。
 
 用法:
     python run.py -e examples/1_read_data.yaml -m demo1_read_data

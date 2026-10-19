@@ -1,6 +1,6 @@
 #encoding=utf8
 """
-FlowStat 实验配置与任务调度工具（已脱敏，去除原 aibee 专属逻辑）。
+FlowStat 实验配置与任务调度工具（通用）。
 
 - ExpConf:    解析 exp.yaml（conf 基础配置 + 指定 stream 下的 metric 列表）
 - StreamTask: 按类名扫描 metric 目录并链式加载实例，依次 process 并深度合并输出
@@ -40,7 +40,7 @@ def get_split_job_list(start_dt, end_dt):
 def check_table_exists(brand_city_site, dt):
     """
     数据就绪检查（占位）。
-    原 aibee 版本会 ssh 到 HDFS 检查分区；通用版请在此接入你自己的存储（对象存储/数据库）的就绪探测。
+    早期版本会 ssh 到 HDFS 检查分区；通用版请在此接入你自己的存储（对象存储/数据库）的就绪探测。
     返回 0 表示直接放行。
     """
     return 0

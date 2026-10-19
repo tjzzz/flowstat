@@ -2,8 +2,6 @@
 
 基于 DataFrame 的**通用日志/事件统计分析框架**（插件化 metric + reader 注册 + yaml 驱动实验）。
 
-> 本仓库由 aibee 内部 `logstat` 项目**抽象重构**而来：仅保留其架构模式与方法论（实验调度、reader 注册、metric 插件、yaml 驱动），**已完整剥离**原项目的凭证、Kerberos keytab、内网集群配置、内部域名与真实业务/客户数据。
-
 ## 架构
 
 ```
@@ -21,13 +19,12 @@ exp.yaml ──▶ ExpConf 解析
 - `metrics/`         metric 插件库（自带 `metrics_demo` 示例）
 - `src/`             通用工具（`tools` 日期/几何、`send_mail` 邮件占位）
 - `examples/`        示例 yaml + 合成数据
-- `streamlitapps/`   Streamlit 前端框架
 
 ## 安装
 
 ```bash
 pip install -r requirements.txt
-# 前端: streamlit；停留点检测: pyinter；轨迹长度: shapely
+# 停留点检测: pyinter；轨迹长度: shapely
 ```
 
 ## 快速开始
@@ -76,6 +73,6 @@ my_stream:
 ## 提交前自检
 
 - [x] 无明文密码 / keytab
-- [x] 无 `aibee.cn` / `code.aibee.cn` / 内网 IP
+- [x] 无内部域名 / 内网 IP
 - [x] 无真实客户/商场数据（示例用合成数据）
 - [x] `.gitignore` 已忽略 `.DS_Store` / `__pycache__` / `*.keytab`

@@ -1,6 +1,6 @@
 #encoding=utf8
 """
-Reader 基类说明（通用，去除原 aibee 专属）。
+Reader 基类说明（通用）。
 
 - 本地 reader: 继承 BaseReader，构造器 (exp_info)，实现 fetch_xxx(self) -> (pd.DataFrame, name)
 

@@ -1,6 +1,6 @@
 #encoding=utf8
 """
-通用邮件通知（占位，去除原 aibee 硬编码域名/密码）。
+通用邮件通知（占位，需自行接入 SMTP/邮件服务）。
 
 默认仅打印，避免误发或泄露。需要真实发送时：
 1) 设置环境变量 SMTP_HOST / SMTP_PORT / SMTP_USER / SMTP_PASS / SMTP_TO
