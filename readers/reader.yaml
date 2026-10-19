@@ -1,0 +1,3 @@
+# reader 注册表：文件名(去 .py): 类名
+# 调用方式（exp.yaml 中）:  reader: csv_reader.load_events
+csv_reader: CSVReaders

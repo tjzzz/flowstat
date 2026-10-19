@@ -1,0 +1,8 @@
+﻿floor,event_type,ts
+1F,enter,10
+2F,enter,20
+2F,stay,30
+1F,exit,40
+2F,enter,50
+3F,enter,60
+2F,stay,70

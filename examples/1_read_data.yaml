@@ -1,0 +1,10 @@
+## FlowStat 使用示例
+conf:
+    metric_dir: 'metrics/metrics_demo/'
+    start_dt: '2020-09-01'
+    end_dt:   '2020-09-07'
+
+### 读取本地 CSV 事件数据并做简单统计
+demo1_read_data:
+    - reader: csv.load_events
+    - MetricDemo: 'floor:2F'

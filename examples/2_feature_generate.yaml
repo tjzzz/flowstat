@@ -1,0 +1,7 @@
+## 多 metric 串联示例（演示 stream 内多个 metric 依次 process 并深度合并输出）
+conf:
+    metric_dir: 'metrics/metrics_demo/'
+
+feature_demo:
+    - reader: csv.load_events
+    - MetricDemo: 'floor:2F'
