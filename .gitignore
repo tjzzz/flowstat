@@ -5,3 +5,11 @@ __pycache__/
 .env
 *.egg-info/
 .venv/
+
+# 运行时产物（建模/解释落盘）
+job_result/
+explain_result/
+models_traffic/
+*.pkl
+*.h5
+save.code_mapping_dict

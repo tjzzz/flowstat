@@ -16,7 +16,7 @@ exp.yaml ──▶ ExpConf 解析
 - `run.py`            总入口（CLI + `run()` 函数）
 - `utils.py`          `ExpConf`（解析 yaml）、`StreamTask`（加载并链式执行 metric）
 - `readers/`         reader 注册（`reader.yaml`）+ `BaseReader` 基类 + 示例 `CSVReaders`
-- `metrics/`         metric 插件库（自带 `metrics_demo` / `metrics_ab` 示例）
+- `metrics/`         metric 插件库（自带 `metrics_demo` / `metrics_ab` / `metrics_ml`）
 - `src/`             通用工具（`tools` 日期/几何、`send_mail` 邮件占位）
 - `examples/`        示例 yaml + 合成数据
 
@@ -88,6 +88,25 @@ my_stream:
 python run.py -e examples/3_ab_analysis.yaml -m ab_analysis
 python run.py -e examples/4_sample_size.yaml -m plan_sample
 ```
+
+## 传统机器学习建模（metrics_ml）
+
+`metrics/metrics_ml/` 是从通用建模场景中抽象出的监督学习工具（移植自内部项目，已脱敏），提供统一接口的模型基类与一键训练/预测/解释/特征分析/对比：
+
+- `ml_base.BaseClassifier`        统一基类 + LR / LGBM / XGB / RF / KNN / DT / SGD / AdaBoost 封装（FM/DeepFM 需 deepctr，可选）
+- `MLTrainMetric`           训练一个分类/回归模型，自动编码类别特征、切分、调参、评估、落盘 pkl
+- `MLPredictMetric`         加载训练产出的编码映射，对新数据预测并评估
+- `MLExplainMetric`         SHAP 特征归因 + 按维度拆解定位预测错误（卡方 / t 检验）
+- `FeatureAnalysisMetric`   自动特征显著性分析（卡方 / 方差分析 / 皮尔逊 / 序列）
+- `ModelReportMetric`       汇总多个训练 job 的评估指标做对比
+
+跑示例（默认 `rf`，仅依赖 scikit-learn）：
+
+```bash
+python run.py -e examples/5_ml_train.yaml -m ml_train
+```
+
+`MLTrainMetric` 的 par_dict 关键项：`df_key`(reader 产出的 DataFrame 名)、`label_col`、`model_name`、`sparse_features`(类别)、`dense_features`(连续)、`train_test_method`(比例或按时间)、`job_result_dir`。
 
 ## 提交前自检
 

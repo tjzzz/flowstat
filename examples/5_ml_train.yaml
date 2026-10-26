@@ -1,0 +1,20 @@
+# FlowStat 传统 ML 建模示例
+# 用法: python run.py -e examples/5_ml_train.yaml -m ml_train
+#
+# 说明: 默认模型 rf(RandomForest, 仅依赖 scikit-learn)。
+# 若改用 lgb / xgb，请先 pip install lightgbm xgboost。
+conf:
+    metric_dir: 'metrics/metrics_ml/'
+
+ml_train:
+    - reader: csv.load_ml
+    - MLTrainMetric:
+        df_key: ml                # 来自 reader(csv.load_ml) 的 DataFrame 名
+        label_col: label          # 二分类标签列(0/1)
+        model_name: rf            # lr / rf / dt / kn / sgd / adaboost / lgb / xgb
+        sparse_features: [gender, city, device]   # 类别特征(自动 LabelEncoder)
+        dense_features: [age, income, freq]        # 连续特征
+        uid: uid                  # 可选，便于按样本回溯
+        train_test_method: 0.8-0.2   # 比例切分；或 'dt' 按时间切分
+        job_result_dir: job_result/ml_demo/   # 模型/映射表/评估落盘目录
+        # model_par_dict: { n_estimators: 200, max_depth: 8 }  # 指定参数则跳过调参
