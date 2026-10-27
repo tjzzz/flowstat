@@ -1,0 +1,15 @@
+conf:
+    metric_dir: 'metrics/metrics_ts/'
+
+ts_predict:
+    - reader: csv_reader.load_ts
+    - TSPredictMetric:
+        df_key: ts
+        model_name: base2        # base | base2 | prophet | sarimax | sarimax_garch | lgb | VAR | LSTM
+        data_method: seasonal    # raw | seasonal | seasonal_diff
+        train_num: 0             # 0=用全部历史
+        test_num: 30             # 滑动评估次数
+        forcast_num: 1           # 每次预测步数
+        min_samples: 50          # 过滤样本量过少的组
+        save_model: 1
+        result_dir: ts_result/demo/

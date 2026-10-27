@@ -9,6 +9,10 @@ scikit-learn>=0.24  # 传统 ML 建模（metrics_ml：LR/RF/DT/KNN/SGD/AdaBoost 
 lightgbm>=3.0     # metrics_ml: LGBMModel
 xgboost>=1.3      # metrics_ml: XGBMModel
 shap>=0.40        # metrics_ml: MLExplainMetric(SHAP)
-statsmodels>=0.12 # metrics_ml: FeatureAnalysisMetric(ANOVA/OLS)
+statsmodels>=0.12 # metrics_ml: FeatureAnalysisMetric(ANOVA/OLS); metrics_ts: SARIMAX/VAR/白噪声检验
 chinese_calendar  # metrics_ml: 工作日判断(可选)
 # deepctr           # metrics_ml: FMModel(DeepFM/NFFM, 可选)
+prophet>=1.1      # metrics_ts: ProphetForecaster / TSPredictMetric(model=prophet)
+arch>=5.0         # metrics_ts: GARCH 残差修正(可选)
+# keras>=2.0       # metrics_ts: LSTMPredict(可选)
+# lightgbm>=3.0    # metrics_ts: GeneralTSPredict(model=lgb)，metrics_ml 已列

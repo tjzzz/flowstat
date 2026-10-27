@@ -10,6 +10,7 @@ __pycache__/
 job_result/
 explain_result/
 models_traffic/
+ts_result/
 *.pkl
 *.h5
 save.code_mapping_dict

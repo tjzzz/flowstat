@@ -108,6 +108,26 @@ python run.py -e examples/5_ml_train.yaml -m ml_train
 
 `MLTrainMetric` 的 par_dict 关键项：`df_key`(reader 产出的 DataFrame 名)、`label_col`、`model_name`、`sparse_features`(类别)、`dense_features`(连续)、`train_test_method`(比例或按时间)、`job_result_dir`。
 
+## 时间序列预测（metrics_ts）
+
+`metrics/metrics_ts/` 是从通用时序预测场景中抽象出的工具（移植自内部项目，已脱敏），支持单序列/多分组序列的滑动预测与多种模型：
+
+- `ts_base.GeneralTSPredict`  通用入口，内置 base / base2（朴素） / prophet / sarimax / sarimax_garch / sarimax_ex / lgb 等模型，支持 raw|seasonal|seasonal_diff 量纲变换
+- `ts_base.LSTMPredict`       基于 keras 的单序列 LSTM 预测（懒加载）
+- `ts_base.VARPredict`        基于 statsmodels VAR 的多序列联合预测（懒加载）
+- `window.Window`             滑动窗口均值基线
+- `prophet_model.ProphetForecaster`  带外生回归量 + 中国节假日的 Prophet 封装
+- `xgb_ar.XgbARForecaster`    用历史滞后值做特征的 XGBoost 自回归
+- `TSPredictMetric`           框架原生插件，逐分组跑预测并输出 MAE/MAPE/RMSE + 整体加权汇总
+
+跑示例（默认 `base2`，仅需 pandas/numpy；prophet/sarimax/lgb 等按需装对应依赖）：
+
+```bash
+python run.py -e examples/6_ts_predict.yaml -m ts_predict
+```
+
+`TSPredictMetric` 的 par_dict 关键项：`df_key`(reader 产出的 DataFrame 名，含 group_id/ds/y)、`model_name`、`data_method`、`train_num`、`test_num`、`forcast_num`、`min_samples`(过滤样本过少组)、`result_dir`。
+
 ## 提交前自检
 
 - [x] 无明文密码 / keytab

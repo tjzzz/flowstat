@@ -23,3 +23,8 @@ class CSVReaders(object):
         """读取示例分类建模数据(类别+连续特征+label)，返回 (DataFrame, 'ml')。"""
         df = pd.read_csv(os.path.join(self.data_dir, 'sample_ml.csv'))
         return df, 'ml'
+
+    def load_ts(self):
+        """读取示例时间序列数据(group_id/ds/y)，返回 (DataFrame, 'ts')。"""
+        df = pd.read_csv(os.path.join(self.data_dir, 'sample_ts.csv'))
+        return df, 'ts'
